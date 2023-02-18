@@ -84,12 +84,12 @@ describe('total likes', () => {
 })
 
 describe('favourite blog', () => {
-	test('of empty list is zero', () => {
+	test('of empty list is empty object', () => {
 		const result = listHelper.favoriteBlog([])
 		expect(result).toEqual({})
 	})
 
-	test('when list has only one blog, equals the likes of that', () => {
+	test('when list has only one blog, equals to that blog', () => {
 		const result = listHelper.favoriteBlog(listWithOneBlog)
 		const favouriteBlog = {
 			title: 'Go To Statement Considered Harmful',
@@ -110,19 +110,19 @@ describe('favourite blog', () => {
 	})
 })
 
-describe('most blog', () => {
-	test('of empty list is zero', () => {
+describe('author with most blogs', () => {
+	test('of empty list is empty object', () => {
 		const result = listHelper.mostBlogs([])
 		expect(result).toEqual({})
 	})
 
-	test('when list has only one blog, equals the likes of that', () => {
+	test('when list has only one blog, equals the author of that', () => {
 		const result = listHelper.mostBlogs(listWithOneBlog)
-		const favouriteBlog = {
+		const authorWithMostBlogs = {
 			author: 'Edsger W. Dijkstra',
 			blogs: 1,
 		}
-		expect(result).toEqual(favouriteBlog)
+		expect(result).toEqual(authorWithMostBlogs)
 	})
 
 	test('of a bigger list is calculated right', () => {
@@ -132,5 +132,30 @@ describe('most blog', () => {
 			blogs: 3,
 		}
 		expect(result).toEqual(authorWithMostBlogs)
+	})
+})
+
+describe('author with most likes', () => {
+	test('of empty list is empty object', () => {
+		const result = listHelper.mostLikes([])
+		expect(result).toEqual({})
+	})
+
+	test('when list has only one blog, equals the likes of that', () => {
+		const result = listHelper.mostLikes(listWithOneBlog)
+		const authorWithMostLikes = {
+			author: 'Edsger W. Dijkstra',
+			likes: 5,
+		}
+		expect(result).toEqual(authorWithMostLikes)
+	})
+
+	test('of a bigger list is calculated right', () => {
+		const result = listHelper.mostLikes(blogs)
+		const authorWithMostLikes = {
+			author: 'Edsger W. Dijkstra',
+			likes: 17
+		}
+		expect(result).toEqual(authorWithMostLikes)
 	})
 })
