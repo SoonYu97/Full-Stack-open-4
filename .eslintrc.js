@@ -28,6 +28,7 @@ module.exports = {
 		'semi': [
 			'error',
 			'never'
-		]
+		],
+		'no-unused-vars': ['error', { 'ignoreRestSiblings': true }]
 	}
 }
