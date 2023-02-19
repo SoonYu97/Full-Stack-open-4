@@ -68,7 +68,18 @@ describe('blog ', () => {
 		expect(blog.likes).toBeDefined()
 		expect(blog.likes).toBe(0)
 	})
+
+	test('cannot be added without title or url', async () => {
+		const newBlog = {
+			author: 'Michael Chan',
+		}
+		await api
+			.post('/api/blogs')
+			.send(newBlog)
+			.expect(400)
+	})
 })
+
 afterAll(async () => {
 	await mongoose.connection.close()
 })
