@@ -48,6 +48,26 @@ describe('blog ', () => {
 			'Nextjs patterns'
 		)
 	})
+
+	test('can be added without like and return 0 like', async () => {
+		const newBlog = {
+			title: 'Nextjs patterns',
+			author: 'Michael Chan',
+			url: 'https://nextjs.org/',
+		}
+		await api
+			.post('/api/blogs')
+			.send(newBlog)
+			.expect(201)
+			.expect('Content-Type', /application\/json/)
+
+		const response = await api.get('/api/blogs')
+
+		const blog = response.body.find(r => r.title === 'Nextjs patterns')
+		expect(response.body).toHaveLength(helper.initialBlogs.length + 1)
+		expect(blog.likes).toBeDefined()
+		expect(blog.likes).toBe(0)
+	})
 })
 afterAll(async () => {
 	await mongoose.connection.close()
